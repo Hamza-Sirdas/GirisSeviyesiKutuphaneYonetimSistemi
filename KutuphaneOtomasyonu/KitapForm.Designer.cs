@@ -43,13 +43,15 @@
             btnKapat = new Button();
             btnKitapGuncelle = new Button();
             btnKitapSil = new Button();
+            label1 = new Label();
+            txtArama = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvKitaplar).BeginInit();
             SuspendLayout();
             // 
             // dgvKitaplar
             // 
             dgvKitaplar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvKitaplar.Location = new Point(398, 73);
+            dgvKitaplar.Location = new Point(409, 129);
             dgvKitaplar.Name = "dgvKitaplar";
             dgvKitaplar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvKitaplar.Size = new Size(294, 319);
@@ -192,12 +194,33 @@
             btnKitapSil.UseVisualStyleBackColor = false;
             btnKitapSil.Click += btnKitapSil_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            label1.Location = new Point(396, 100);
+            label1.Name = "label1";
+            label1.Size = new Size(159, 21);
+            label1.TabIndex = 34;
+            label1.Text = "Kitap veya Yazar Ara:";
+            label1.Click += label1_Click;
+            // 
+            // txtArama
+            // 
+            txtArama.Location = new Point(561, 100);
+            txtArama.Name = "txtArama";
+            txtArama.Size = new Size(153, 23);
+            txtArama.TabIndex = 35;
+            txtArama.TextChanged += txtArama_TextChanged;
+            // 
             // KitapForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = btnKapat;
             ClientSize = new Size(800, 533);
+            Controls.Add(txtArama);
+            Controls.Add(label1);
             Controls.Add(btnKitapSil);
             Controls.Add(btnKitapGuncelle);
             Controls.Add(btnKapat);
@@ -240,5 +263,7 @@
         private Button btnKapat;
         private Button btnKitapGuncelle;
         private Button btnKitapSil;
+        private Label label1;
+        private TextBox txtArama;
     }
 }

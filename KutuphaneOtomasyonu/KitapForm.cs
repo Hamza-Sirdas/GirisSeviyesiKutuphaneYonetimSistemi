@@ -27,10 +27,25 @@ namespace KutuphaneOtomasyonu
             }
         }
 
-        private void KitaplariListele()
+        private void KitaplariListele(string aramaMetni = "")
         {
             using (var db = new KutuphaneDbContext())
             {
+
+                // Sorguyu henüz çalıştırmadan hazırlıyoruz(IQueryable):
+                var sorgu = db.Kitaplar.AsQueryable();
+
+                //Eğer arama kutusuna bir şey yazılmışsa filtreyi ekliyoruz:
+
+                if (!string.IsNullOrWhiteSpace(aramaMetni))
+                {
+                    string aranan = aramaMetni.Trim().ToLower();
+
+                    sorgu = sorgu.Where(k => k.KitapAdi.ToLower().Contains(aranan) ||
+                                             k.Yazar.ToLower().Contains(aranan) ||
+                                             k.Barkod.Contains(aranan));
+                }
+
                 var kitapListesi = db.Kitaplar.Select(k => new
                 {
                     k.Id,
@@ -43,7 +58,18 @@ namespace KutuphaneOtomasyonu
                 }).ToList();
 
                 dgvKitaplar.DataSource = kitapListesi;
+
+                if (dgvKitaplar.Columns["RafId"] != null)
+                {
+                    dgvKitaplar.Columns["RafId"].Visible = false;
+                }
+
+
             }
+        }  
+        private void txtArama_TextChanged(object sender, EventArgs e)
+        {
+            KitaplariListele(txtArama.Text);
         }
 
         private void btnKitapKaydet_Click_1(object sender, EventArgs e)
@@ -207,5 +233,12 @@ namespace KutuphaneOtomasyonu
 
 
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+     
     }
 }
