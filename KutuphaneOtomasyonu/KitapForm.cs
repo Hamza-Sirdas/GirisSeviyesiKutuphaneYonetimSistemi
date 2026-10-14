@@ -152,7 +152,60 @@ namespace KutuphaneOtomasyonu
             txtYazar.Clear();
             txtBarkod.Clear();
             txtStokAdedi.Clear();
-            secilenKitapId = 0; 
+            secilenKitapId = 0;
+        }
+
+        private void btnKitapSil_Click(object sender, EventArgs e)
+        {
+            if (secilenKitapId == 0)
+            {
+                MessageBox.Show("Lütfen önce tablodan silinecek kitabı seçiniz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (var db = new KutuphaneDbContext())
+            {
+                bool suAnEmanetteMi = db.Emanetler.Any(e => e.KitapId == secilenKitapId && e.TeslimEdildiMi == false);
+
+
+                if (suAnEmanetteMi)
+                {
+                    MessageBox.Show("Bu kitap şu anda bir üyeye ödünç verilmiş durumda! Teslim alınmadan silinemez.", "İşlem Engellendi", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    return;
+                }
+
+
+                bool gecmisEmanetKaydiVarMi = db.Emanetler.Any(e => e.KitapId == secilenKitapId);
+
+
+                if (gecmisEmanetKaydiVarMi)
+                {
+                    MessageBox.Show("Bu kitaba ait geçmiş ödünç hareketleri bulunmaktadır. Veri tabanı bütünlüğü için bu kitap silinemez!\n\n(Bunun yerine stok adedini 0 yapabilirsiniz.)", "Kayıt Koruma", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+
+                DialogResult onay = MessageBox.Show("Bu kitabı tamamen silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (onay == DialogResult.Yes)
+                {
+                    var silinecekKitap = db.Kitaplar.Find(secilenKitapId);
+
+                    if (silinecekKitap != null)
+                    {
+                        db.Kitaplar.Remove(silinecekKitap);
+                        db.SaveChanges(); // SQL: DELETE FROM Kitaplar WHERE Id = @secilenKitapId
+
+                        MessageBox.Show("Kitap başarıyla silindi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+
+                KutulariTemizle();
+                KitaplariListele();
+
+            }
+
+
         }
     }
 }

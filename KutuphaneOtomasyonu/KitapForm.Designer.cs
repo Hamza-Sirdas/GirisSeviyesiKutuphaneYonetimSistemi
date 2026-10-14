@@ -42,6 +42,7 @@
             label3 = new Label();
             btnKapat = new Button();
             btnKitapGuncelle = new Button();
+            btnKitapSil = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvKitaplar).BeginInit();
             SuspendLayout();
             // 
@@ -57,13 +58,14 @@
             // 
             // btnKitapKaydet
             // 
+            btnKitapKaydet.BackColor = Color.FromArgb(192, 0, 192);
             btnKitapKaydet.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnKitapKaydet.Location = new Point(248, 321);
+            btnKitapKaydet.Location = new Point(226, 309);
             btnKitapKaydet.Name = "btnKitapKaydet";
-            btnKitapKaydet.Size = new Size(121, 43);
+            btnKitapKaydet.Size = new Size(144, 43);
             btnKitapKaydet.TabIndex = 28;
             btnKitapKaydet.Text = "Kitap Kaydet";
-            btnKitapKaydet.UseVisualStyleBackColor = true;
+            btnKitapKaydet.UseVisualStyleBackColor = false;
             btnKitapKaydet.Click += btnKitapKaydet_Click_1;
             // 
             // cmbRaflar
@@ -155,8 +157,9 @@
             // 
             // btnKapat
             // 
-            btnKapat.BackColor = Color.LightCoral;
+            btnKapat.BackColor = Color.Red;
             btnKapat.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnKapat.ForeColor = SystemColors.ButtonHighlight;
             btnKapat.Location = new Point(634, 12);
             btnKapat.Name = "btnKapat";
             btnKapat.Size = new Size(154, 32);
@@ -167,21 +170,35 @@
             // 
             // btnKitapGuncelle
             // 
+            btnKitapGuncelle.BackColor = Color.FromArgb(192, 0, 192);
             btnKitapGuncelle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnKitapGuncelle.Location = new Point(89, 321);
+            btnKitapGuncelle.Location = new Point(226, 374);
             btnKitapGuncelle.Name = "btnKitapGuncelle";
             btnKitapGuncelle.Size = new Size(144, 43);
             btnKitapGuncelle.TabIndex = 32;
             btnKitapGuncelle.Text = "Kitap Güncelle";
-            btnKitapGuncelle.UseVisualStyleBackColor = true;
+            btnKitapGuncelle.UseVisualStyleBackColor = false;
             btnKitapGuncelle.Click += btnKitapGuncelle_Click;
+            // 
+            // btnKitapSil
+            // 
+            btnKitapSil.BackColor = Color.FromArgb(192, 0, 192);
+            btnKitapSil.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnKitapSil.Location = new Point(225, 436);
+            btnKitapSil.Name = "btnKitapSil";
+            btnKitapSil.Size = new Size(144, 43);
+            btnKitapSil.TabIndex = 33;
+            btnKitapSil.Text = "Kitapı Sil";
+            btnKitapSil.UseVisualStyleBackColor = false;
+            btnKitapSil.Click += btnKitapSil_Click;
             // 
             // KitapForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = btnKapat;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 533);
+            Controls.Add(btnKitapSil);
             Controls.Add(btnKitapGuncelle);
             Controls.Add(btnKapat);
             Controls.Add(dgvKitaplar);
@@ -222,5 +239,6 @@
         private Label label3;
         private Button btnKapat;
         private Button btnKitapGuncelle;
+        private Button btnKitapSil;
     }
 }

@@ -36,6 +36,7 @@
             label8 = new Label();
             btnKapat = new Button();
             btnUyeGuncelle = new Button();
+            btnUyeSil = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvUyeler).BeginInit();
             SuspendLayout();
             // 
@@ -52,9 +53,9 @@
             // btnUyeKaydet
             // 
             btnUyeKaydet.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnUyeKaydet.Location = new Point(250, 208);
+            btnUyeKaydet.Location = new Point(224, 208);
             btnUyeKaydet.Name = "btnUyeKaydet";
-            btnUyeKaydet.Size = new Size(109, 39);
+            btnUyeKaydet.Size = new Size(126, 39);
             btnUyeKaydet.TabIndex = 28;
             btnUyeKaydet.Text = "Üye Kaydet";
             btnUyeKaydet.UseVisualStyleBackColor = true;
@@ -109,7 +110,7 @@
             // btnUyeGuncelle
             // 
             btnUyeGuncelle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
-            btnUyeGuncelle.Location = new Point(111, 208);
+            btnUyeGuncelle.Location = new Point(224, 268);
             btnUyeGuncelle.Name = "btnUyeGuncelle";
             btnUyeGuncelle.Size = new Size(126, 39);
             btnUyeGuncelle.TabIndex = 31;
@@ -117,12 +118,24 @@
             btnUyeGuncelle.UseVisualStyleBackColor = true;
             btnUyeGuncelle.Click += btnUyeGuncelle_Click;
             // 
+            // btnUyeSil
+            // 
+            btnUyeSil.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 162);
+            btnUyeSil.Location = new Point(224, 326);
+            btnUyeSil.Name = "btnUyeSil";
+            btnUyeSil.Size = new Size(126, 40);
+            btnUyeSil.TabIndex = 32;
+            btnUyeSil.Text = "Üye Sil";
+            btnUyeSil.UseVisualStyleBackColor = true;
+            btnUyeSil.Click += btnUyeSil_Click;
+            // 
             // UyeForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = btnKapat;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnUyeSil);
             Controls.Add(btnUyeGuncelle);
             Controls.Add(btnKapat);
             Controls.Add(dgvUyeler);
@@ -151,5 +164,6 @@
         private Label label8;
         private Button btnKapat;
         private Button btnUyeGuncelle;
+        private Button btnUyeSil;
     }
 }

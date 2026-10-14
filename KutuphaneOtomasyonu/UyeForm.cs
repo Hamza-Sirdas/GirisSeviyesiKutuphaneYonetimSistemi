@@ -120,5 +120,50 @@ namespace KutuphaneOtomasyonu
             txtUyeTelefon.Clear();
             secilenUyeId = 0;
         }
+
+        private void btnUyeSil_Click(object sender, EventArgs e)
+        {
+
+
+            if (secilenUyeId == 0)
+            {
+                MessageBox.Show("Lütfen önce tablodan silinecek üyeyi seçiniz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
+            using (var db = new KutuphaneDbContext())
+            {
+                //Üyenin elinde teslim etmediği kitap var mı?
+                bool elindeKitapVarMi = db.Emanetler.Any(e => e.UyeId == secilenUyeId && e.TeslimEdildiMi == false);
+
+                if (elindeKitapVarMi)
+                {
+                    MessageBox.Show("Bu üyenin üzerinde henüz teslim edilmemiş emanet kitaplar bulunmaktadır! Üye silinemez.", "İşlem Engellendi", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    return;
+                }
+
+
+                DialogResult onay = MessageBox.Show("Bu üyeyi silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (onay == DialogResult.Yes)
+                {
+                    var silinecekUye = db.Uyeler.Find(secilenUyeId);
+
+                    if (silinecekUye != null)
+                    {
+                        db.Uyeler.Remove(silinecekUye);
+                        db.SaveChanges(); // SQL: DELETE FROM Uyeler WHERE Id = @secilenUyeId
+
+                        MessageBox.Show("Üye başarıyla silindi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+
+            }
+
+            KutulariTemizle();
+            UyeleriListele();   
+
+        }
     }
 }
